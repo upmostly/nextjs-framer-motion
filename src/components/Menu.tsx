@@ -1,7 +1,15 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { WithChildrenProps } from '../types';
-import { FaCog, FaHome, FaUsers } from 'react-icons/fa';
-import { useState } from 'react';
+import {
+    FaArrowLeft,
+    FaArrowRight,
+    FaCog,
+    FaCross,
+    FaDesktop,
+    FaHome,
+    FaUsers,
+} from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 type IconLinkProps = WithChildrenProps;
 
@@ -47,22 +55,46 @@ export function AnimatedIconLink({
 
 export function Menu() {
     const [social, setSocial] = useState<number | null>(null);
+    const [open, setOpen] = useState(true);
     const icons = [FaHome, FaUsers, FaCog];
+
+    useEffect(() => {
+        console.log(open);
+    }, [open]);
+
     return (
-        <nav className="flex h-full w-24 flex-col items-center justify-center gap-4 bg-stone-900 text-3xl text-white">
-            <menu
-                className="flex flex-col items-center justify-center gap-4 text-3xl text-white"
-                onMouseLeave={() => setSocial(null)}>
-                {icons.map((Icon, i) => (
-                    <AnimatedIconLink
-                        index={i}
-                        key={i}
-                        currentIndex={social}
-                        onEnter={setSocial}>
-                        <Icon />
-                    </AnimatedIconLink>
-                ))}
-            </menu>
-        </nav>
+        <motion.nav
+            className="flex h-full w-fit flex-col items-center justify-between gap-4 bg-stone-900 py-10 px-5 text-3xl text-white"
+            layout>
+            {open ? (
+                <div className="flex h-full w-full flex-col items-center justify-between">
+                    <FaDesktop className="text-xl" />
+                    <menu
+                        className="flex flex-col items-center justify-center gap-4 text-3xl text-white"
+                        onMouseLeave={() => setSocial(null)}>
+                        {icons.map((Icon, i) => (
+                            <AnimatedIconLink
+                                index={i}
+                                key={i}
+                                currentIndex={social}
+                                onEnter={setSocial}>
+                                <Icon />
+                            </AnimatedIconLink>
+                        ))}
+                    </menu>
+                    <button
+                        className="p-4 text-xl"
+                        onClick={() => setOpen(false)}>
+                        <FaArrowLeft />
+                    </button>
+                </div>
+            ) : (
+                <div className="flex h-full items-center justify-center">
+                    <button className="text-xl" onClick={() => setOpen(true)}>
+                        <FaArrowRight />
+                    </button>
+                </div>
+            )}
+        </motion.nav>
     );
 }
