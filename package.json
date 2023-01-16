@@ -11,7 +11,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "clsx": "^1.2.1",
     "eslint-config-next": "^13.1.1",
-    "framer-motion": "^7.10.2",
+    "framer-motion": "^8.4.3",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
