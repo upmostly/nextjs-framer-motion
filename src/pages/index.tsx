@@ -2,6 +2,9 @@ import Head from 'next/head';
 import { Menu } from '@/components/Menu';
 import clsx from 'clsx';
 import { title } from '../fonts';
+import { Dashboard } from '@/components/Dashboard';
+import { WithChildrenProps } from '../types';
+import { motion } from 'framer-motion';
 
 export default function Home() {
     return (
@@ -14,8 +17,9 @@ export default function Home() {
                 <title>Hello World!</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className="h-screen w-full">
+            <main className="flex h-screen w-full flex-row">
                 <Menu />
+                <Dashboard />
             </main>
         </div>
     );
